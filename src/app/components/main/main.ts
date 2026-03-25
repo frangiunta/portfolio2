@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Importa los componentes que ya modernizamos
-import { ToolbarComponent } from '../toolbar/toolbar.component';
-import { PerfilComponent } from '../perfil/perfil.component';
-import { ExperienciaComponent } from '../experiencia/experiencia.component';
-import { EducacionComponent } from '../educacion/educacion.component';
-import { FooterComponent } from '../footer/footer.component';
+import { ToolbarComponent } from '../toolbar/toolbar';
+import { PerfilComponent } from '../perfil/perfil';
+import { ExperienciaComponent } from '../experiencia/experiencia';
+import { EducacionComponent } from '../educacion/educacion';
+import { FooterComponent } from '../footer/footer';
 // Nota: Importa Skills y Proyectos cuando los tengamos listos
 
 @Component({

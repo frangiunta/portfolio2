@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment'; // Ajusta la ruta según tu nueva estructura
-import { Educacion } from '../interfaces/Educacion'; // Ajusta la ruta
+import { environment } from '../../environments/environment';
+import { Educacion } from '../interface/educacion';
 
 @Injectable({
   providedIn: 'root'

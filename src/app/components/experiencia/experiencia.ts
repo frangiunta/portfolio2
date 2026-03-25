@@ -5,15 +5,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 // Angular Material
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
 
-import { Experiencia } from '../../interfaces/Experiencia';
-import { ExperienciaService } from '../../servicios/experiencia.service';
-import { TokenService } from '../../servicios/token.service';
+import { Experiencia } from '../../interface/experiencia';
+import { ExperienciaService } from '../../services/experiencia';
+import { TokenService } from '../../services/token';
 
 @Component({
   selector: 'app-experiencia',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatCardModule, MatButtonModule],
+  imports: [CommonModule, FormsModule, MatCardModule, MatButtonModule, MatGridListModule],
   templateUrl: './experiencia.html',
   styleUrls: ['./experiencia.css']
 })
@@ -41,7 +42,7 @@ export class ExperienciaComponent implements OnInit {
   }
 
   public getExperiencias(): void {
-    this.experienciaService.GetExperiencia().subscribe({
+    this.experienciaService.getExperiencia().subscribe({
       next: (response: Experiencia[]) => {
         this.experiencias.set(response);
       },

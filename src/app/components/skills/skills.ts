@@ -2,16 +2,14 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
 // Angular Material
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-
 // Servicios e Interfaces
-import { SkillsService } from '../../servicios/skills.service';
-import { Skills } from '../../interfaces/Skills';
-import { TokenService } from '../../servicios/token.service';
+import { SkillsService } from '../../services/skills';
+import { Skills } from '../../interface/skills';
+import { TokenService } from '../../services/token';
 
 @Component({
   selector: 'app-skills',
@@ -23,8 +21,8 @@ import { TokenService } from '../../servicios/token.service';
     MatButtonModule, 
     MatCardModule
   ],
-  templateUrl: './skills.component.html',
-  styleUrls: ['./skills.component.css']
+  templateUrl: './skills.html',
+  styleUrls: ['./skills.css']
 })
 export class SkillsComponent implements OnInit {
   // Inyección de servicios moderna

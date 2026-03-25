@@ -1,15 +1,18 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Reemplaza funcionalidades de base
-import { FormsModule, NgForm } from '@angular/forms'; // Necesario para NgForm
+import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Educacion } from '../../interfaces/Educacion';
-import { EducacionService } from '../../servicios/educacion.service';
-import { TokenService } from '../../servicios/token.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
+import { Educacion } from '../../interface/educacion';
+import { EducacionService } from '../../services/educacion';
+import { TokenService } from '../../services/token';
 
 @Component({
   selector: 'app-educacion',
   standalone: true, // Indica que es un componente autónomo
-  imports: [CommonModule, FormsModule], // Importamos lo que antes estaba en AppModule
+  imports: [CommonModule, FormsModule, MatCardModule, MatGridListModule, MatButtonModule], // Importamos lo que antes estaba en AppModule
   templateUrl: './educacion.html',
   styleUrls: ['./educacion.css']
 })

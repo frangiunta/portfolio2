@@ -1,14 +1,15 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginUser } from 'src/app/interfaces/security/login-user';
-import { AuthService } from 'src/app/servicios/auth.service';
-import { TokenService } from 'src/app/servicios/token.service';
+import { RouterModule } from '@angular/router';
+import { Login } from '../../../interface/security/login';
+import { AuthService } from '../../../services/auth';
+import { TokenService } from '../../../services/token';
 import { FormsModule } from '@angular/forms'; // Necesario para ngModel
 
 @Component({
   selector: 'app-login',
   standalone: true, // Lo hacemos standalone
-  imports: [FormsModule], // Importamos FormsModule aquí mismo
+  imports: [FormsModule, RouterModule], // Importamos FormsModule aquí mismo
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void {
     // Creamos el objeto directamente (ya no necesitamos 'new' porque es interface)
-    const loginUsuario: LoginUser = {
+    const loginUsuario: Login = {
       nombreUsuario: this.nombreUsuario,
       password: this.password
     };

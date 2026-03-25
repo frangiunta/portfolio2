@@ -2,16 +2,14 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormsModule, NgForm } from '@angular/forms';
-
 // Angular Material
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-
 // Servicios e Interfaces
-import { Proyectos } from '../../interfaces/Proyectos';
-import { ProyectosService } from '../../servicios/proyectos.service';
-import { TokenService } from '../../servicios/token.service';
+import { Proyectos } from '../../interface/proyectos';
+import { ProyectosService } from '../../services/proyectos';
+import { TokenService } from '../../services/token';
 
 @Component({
   selector: 'app-proyectos',
@@ -23,8 +21,8 @@ import { TokenService } from '../../servicios/token.service';
     MatCardModule,
     MatButtonModule
   ],
-  templateUrl: './proyectos.component.html',
-  styleUrls: ['./proyectos.component.css']
+  templateUrl: './proyectos.html',
+  styleUrls: ['./proyectos.css']
 })
 export class ProyectosComponent implements OnInit {
   // Inyección moderna

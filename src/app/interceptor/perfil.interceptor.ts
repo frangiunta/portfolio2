@@ -1,6 +1,6 @@
 import { HttpInterceptorFn, HttpRequest, HttpHandlerFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { TokenService } from '../servicios/token.service';
+import { TokenService } from '../services/token';
 
 export const perfilInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   // Inyectamos el servicio de token de forma funcional

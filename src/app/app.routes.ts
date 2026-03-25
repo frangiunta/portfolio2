@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
 
 // Importación de componentes (Asegurate de que las rutas de archivo sigan siendo estas)
-import { LoginComponent } from './auth/login/login.component';
-import { RegistroComponent } from './auth/registro/registro.component';
-import { MainComponent } from './main/main.component';
+import { LoginComponent } from './components/auth/login/login';
+import { RegistroComponent } from './components/auth/registro/registro/registro';
+import { MainComponent } from './components/main/main';
+import { EducacionComponent } from './components/educacion/educacion';
+import { SkillsComponent } from './components/skills/skills';
 
 export const routes: Routes = [
   // Redirección inicial: Si entra a la raíz, va al Login o al Main según prefieras
@@ -20,8 +22,8 @@ export const routes: Routes = [
    * no necesitan ruta propia a menos que quieras navegar a una página aparte.
    * Si son páginas independientes, dejalas así:
    */
-  { path: 'educacion', component: import('./components/educacion/educacion.component').then(c => c.EducacionComponent) },
-  { path: 'skills', component: import('./components/skills/skills.component').then(c => c.SkillsComponent) },
+  { path: 'educacion', component: EducacionComponent },
+  { path: 'skills', component: SkillsComponent },
   
   // Comodín para rutas no encontradas (404)
   { path: '**', redirectTo: 'login' }

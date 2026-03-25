@@ -5,16 +5,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 // Material (Asegúrate de tener estos instalados/importados)
 import { MatButtonModule } from '@angular/material/button'; 
 
-import { Perfil } from '../../interfaces/Perfil';
-import { PerfilService } from '../../servicios/perfil.service';
-import { TokenService } from '../../servicios/token.service';
+import { Perfil } from '../../interface/perfil';
+import { PerfilService } from '../../services/perfil';
+import { TokenService } from '../../services/token';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
   imports: [CommonModule, FormsModule, MatButtonModule],
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css']
+  templateUrl: './perfil.html',
+  styleUrls: ['./perfil.css']
 })
 export class PerfilComponent implements OnInit {
   // Inyección moderna

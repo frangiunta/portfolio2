@@ -2,15 +2,16 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { TokenService } from '../../servicios/token.service';
+import { RouterModule } from '@angular/router';
+import { TokenService } from '../../services/token';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule],
-  templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css']
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, RouterModule],
+  templateUrl: './toolbar.html',
+  styleUrls: ['./toolbar.css']
 })
 export class ToolbarComponent implements OnInit {
   // Inyección moderna

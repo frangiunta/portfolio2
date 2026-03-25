@@ -1,16 +1,17 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { TokenService } from 'src/app/services/token.service';
-import { NuevoUser } from 'src/app/interfaces/security/nuevo-user';
-import { AuthService } from 'src/app/servicios/auth.service';
+import { RouterModule } from '@angular/router';
+import { TokenService } from '../../../../services/token';
+import { NewUser } from '../../../../interface/security/newuser';
+import { AuthService } from '../../../../services/auth';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [FormsModule],
-  templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.css']
+  imports: [FormsModule, RouterModule],
+  templateUrl: './registro.html',
+  styleUrls: ['./registro.css']
 })
 export class RegistroComponent implements OnInit {
   // Inyección funcional
@@ -38,7 +39,7 @@ export class RegistroComponent implements OnInit {
 
   onRegister(): void {
     // Creamos el objeto basado en la interfaz NuevoUser
-    const nuevoUsuario: NuevoUser = {
+    const nuevoUsuario: NewUser = {
       nombre: this.nombre,
       nombreUsuario: this.nombreUsuario,
       email: this.email,
