@@ -1,0 +1,123 @@
+<mat-card class="m-3 p-4">
+  <h1 class="text-center mb-4">Hard & Soft Skills</h1>
+
+  <mat-card id="gris" class="p-3 shadow-sm">
+    <div id="main-container">
+      @for (skill of skills(); track skill.id) {
+        <div class="skill-item mb-4">
+          <div class="d-flex justify-content-between align-items-center">
+            <h3 class="h5">{{ skill.nombre }}</h3>
+            <span class="badge bg-primary">{{ skill.porcentaje }}%</span>
+          </div>
+          
+          <div id="progress" class="mt-2">
+            <mat-progress-bar mode="determinate" [value]="skill.porcentaje"></mat-progress-bar>
+          </div>
+
+          @if (isAdmin()) {
+            <mat-card-actions class="justify-content-end">
+              <button mat-stroked-button color="accent" class="me-2" (click)="onOpenModal(skill, 'edit')">
+                <i class="bi bi-pencil"></i> Editar
+              </button>
+              <button mat-stroked-button color="warn" (click)="onOpenModal(skill, 'delete')">
+                <i class="bi bi-trash"></i> Borrar
+              </button>
+            </mat-card-actions>
+          }
+        </div>
+      } @empty {
+        <p class="text-center text-muted">No se encontraron habilidades cargadas.</p>
+      }
+
+      @if (isAdmin()) {
+        <div class="text-center mt-4">
+          <button mat-raised-button color="accent" (click)="onOpenModal(null, 'add')">
+            Agregar Nueva Skill
+          </button>
+        </div>
+      }
+    </div>
+  </mat-card>
+</mat-card>
+
+<div class="modal fade" id="addSkill" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Nueva Habilidad</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddSkill(addForm)">
+          <div class="mb-3">
+            <label class="form-label">Habilidad</label>
+            <input type="text" ngModel name="nombre" class="form-control" placeholder="Ej: Angular, Java, Liderazgo" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label d-block">Porcentaje de dominio: {{ addForm.value.porcentaje || 0 }}%</label>
+            <input type="range" ngModel name="porcentaje" class="form-range" min="0" max="100" id="porcentajeRange">
+          </div>
+          <div class="modal-footer px-0 pb-0">
+            <button type="button" id="add-skill-close" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Guardar Skill</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updateSkill" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Habilidad</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <input type="hidden" [ngModel]="editSkill?.id" name="id">
+          <div class="mb-3">
+            <label class="form-label">Habilidad</label>
+            <input type="text" [ngModel]="editSkill?.nombre" name="nombre" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label d-block">Porcentaje: {{ editForm.value.porcentaje }}%</label>
+            <input type="range" [ngModel]="editSkill?.porcentaje" name="porcentaje" class="form-range" min="0" max="100">
+          </div>
+          <div class="modal-footer px-0 pb-0">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button (click)="onUpdateSkill(editForm.value)" data-bs-dismiss="modal" class="btn btn-primary">Guardar Cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteSkill" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content border-danger">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Confirmar eliminación</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro de que deseas eliminar la habilidad <strong>{{ deleteSkill?.nombre }}</strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">No, mantener</button>
+        <button (click)="onDeleteSkill(deleteSkill!.id)" class="btn btn-danger" data-bs-dismiss="modal">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
+
+
+
+
+              
+            
+

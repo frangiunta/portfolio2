@@ -14,8 +14,8 @@ import { TokenService } from '../../servicios/token.service';
   selector: 'app-experiencia',
   standalone: true,
   imports: [CommonModule, FormsModule, MatCardModule, MatButtonModule],
-  templateUrl: './experiencia.component.html',
-  styleUrls: ['./experiencia.component.css']
+  templateUrl: './experiencia.html',
+  styleUrls: ['./experiencia.css']
 })
 export class ExperienciaComponent implements OnInit {
   // Inyección moderna

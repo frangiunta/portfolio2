@@ -1,0 +1,155 @@
+<mat-card class="m-3 p-4 shadow" style="background-color: #2d2d2d; color: white;">
+  <mat-card-title class="text-center mb-4">Proyectos Realizados</mat-card-title>
+
+  <div id="main-container">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      @for (proyecto of proyectos(); track proyecto.id) {
+        <div class="col">
+          <mat-card class="h-100 bg-dark text-white border-secondary">
+            <div class="p-3 text-center">
+              @if (proyecto.imglink) {
+                <img [src]="proyecto.imglink" class="img-fluid rounded shadow-sm project-img" 
+                     [alt]="proyecto.nombre" style="max-height: 200px; object-fit: cover;">
+              }
+            </div>
+
+            <mat-card-content class="text-center">
+              <h2 class="h4 mt-2 text-accent">{{ proyecto.nombre }}</h2>
+              <p class="text-info small">{{ proyecto.descripcion }}</p>
+              <p class="card-text">{{ proyecto.resumen }}</p>
+            </mat-card-content>
+
+            <mat-card-actions class="justify-content-center pb-3">
+              @if (proyecto.gitlink) {
+                <a mat-icon-button [href]="proyecto.gitlink" target="_blank" color="primary" title="Ver Código">
+                  <i class="bi bi-github"></i>
+                </a>
+              }
+              
+              @if (isAdmin()) {
+                <button mat-stroked-button color="accent" (click)="onOpenModal(proyecto, 'edit')" class="mx-1">
+                  Editar
+                </button>
+                <button mat-stroked-button color="warn" (click)="onOpenModal(proyecto, 'delete')">
+                  Borrar
+                </button>
+              }
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      } @empty {
+        <div class="col-12 text-center py-5">
+          <p class="text-muted">Aún no hay proyectos cargados.</p>
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (isAdmin()) {
+    <div class="text-center mt-4">
+      <button mat-raised-button color="accent" (click)="onOpenModal(null, 'add')">
+        <i class="bi bi-plus-circle me-1"></i> Agregar Proyecto
+      </button>
+    </div>
+  }
+</mat-card>
+
+<div class="modal fade" id="addProyecto" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Nuevo Proyecto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddProyecto(addForm)">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Nombre del Proyecto</label>
+              <input type="text" ngModel name="nombre" class="form-control" placeholder="Ej: E-commerce" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Descripción Breve</label>
+              <input type="text" ngModel name="descripcion" class="form-control" placeholder="Ej: App Web de Ventas" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Resumen / Detalle</label>
+            <textarea ngModel name="resumen" class="form-control" rows="3" placeholder="Describe las tecnologías usadas" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">URL de la Imagen</label>
+            <input type="text" ngModel name="imglink" class="form-control" placeholder="https://..." required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">URL de GitHub</label>
+            <input type="text" ngModel name="gitlink" class="form-control" placeholder="https://github.com/..." required>
+          </div>
+          <div class="modal-footer px-0 pb-0">
+            <button type="button" id="add-proyecto-close" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Guardar Proyecto</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updateProyecto" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Proyecto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <input type="hidden" [ngModel]="editProyecto?.id" name="id">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Nombre</label>
+              <input type="text" [ngModel]="editProyecto?.nombre" name="nombre" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Descripción</label>
+              <input type="text" [ngModel]="editProyecto?.descripcion" name="descripcion" class="form-control" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Resumen</label>
+            <textarea [ngModel]="editProyecto?.resumen" name="resumen" class="form-control" rows="3" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Imagen URL</label>
+            <input type="text" [ngModel]="editProyecto?.imglink" name="imglink" class="form-control" required>
+          </div>
+          <div class="modal-footer px-0 pb-0">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button (click)="onUpdateProyecto(editForm.value)" data-bs-dismiss="modal" class="btn btn-primary">Guardar Cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteProyecto" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content border-danger">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Borrar Proyecto</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p>¿Estás seguro de que deseas eliminar <strong>{{ deleteProyecto?.nombre }}</strong>?</p>
+        <p class="text-muted small">Esta acción no se puede deshacer.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">No, cancelar</button>
+        <button (click)="onDeleteProyecto(deleteProyecto!.id)" class="btn btn-danger" data-bs-dismiss="modal">Sí, borrar definitivamente</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</mat-card>

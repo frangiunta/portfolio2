@@ -10,8 +10,8 @@ import { TokenService } from '../../servicios/token.service';
   selector: 'app-educacion',
   standalone: true, // Indica que es un componente autónomo
   imports: [CommonModule, FormsModule], // Importamos lo que antes estaba en AppModule
-  templateUrl: './educacion.component.html',
-  styleUrls: ['./educacion.component.css']
+  templateUrl: './educacion.html',
+  styleUrls: ['./educacion.css']
 })
 export class EducacionComponent implements OnInit {
   // Inyección de servicios moderna
