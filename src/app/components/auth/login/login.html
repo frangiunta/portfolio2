@@ -1,0 +1,65 @@
+<div class="main-login-container" style="background-color: black; min-height: 100vh; padding: 2rem;">
+  
+  @if (isLogged()) {
+    <div class="text-center text-white py-5">
+      <h2 class="mb-4">Ya has iniciado sesión</h2>
+      <a class="btn btn-outline-info" [routerLink]="['/main']">
+        <i class="fas fa-arrow-left me-2"></i> Volver al inicio
+      </a>
+    </div>
+  } @else {
+    <div class="container d-flex justify-content-center">
+      <div class="card shadow-lg" style="max-width: 450px; width: 100%;">
+        <div class="card-header bg-dark text-white">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" [routerLink]="['/login']">Login</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card-body p-4">
+          <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
+            <div class="mb-3">
+              <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
+              <input type="text" 
+                     placeholder="Ingrese su usuario..." 
+                     name="nombreUsuario" 
+                     id="nombreUsuario" 
+                     class="form-control"
+                     [(ngModel)]="nombreUsuario" 
+                     required>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" 
+                     placeholder="Ingrese su contraseña..." 
+                     name="password" 
+                     id="password" 
+                     class="form-control"
+                     [(ngModel)]="password" 
+                     required>
+            </div>
+
+            <div class="d-grid gap-2 mt-4">
+              <button class="btn btn-success" [disabled]="!f.valid">
+                <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+              </button>
+              <button type="button" class="btn btn-outline-secondary" routerLink="/main">
+                Cancelar
+              </button>
+            </div>
+          </form>
+
+          @if (f.submitted && isLoginFail()) {
+            <div class="alert alert-danger mt-3 animate__animated animate__shakeX">
+              <i class="fas fa-exclamation-triangle me-2"></i>
+              Fallo en el login: {{ errMsj() }}
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>

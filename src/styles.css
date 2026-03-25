@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+/* Estilos globales */
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  background-color: #000; /* Fondo negro por defecto para evitar destellos blancos */
+}
+
+body { 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+/* Scrollbar personalizada para que combine con el modo oscuro */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
