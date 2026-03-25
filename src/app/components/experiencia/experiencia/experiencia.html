@@ -1,0 +1,141 @@
+<mat-card style="background-color:rgb(72, 72, 72);">
+  <br>
+  <mat-card-title class="text-center" style="color: white;">Experiencia laboral</mat-card-title>
+  
+  <div id="main-container">
+    @for (exp of experiencias(); track exp.id) {
+    <br>
+    <mat-card class="mb-3">
+      <div class="text-center gris">
+        <br>
+        <mat-grid-list cols="1" rowHeight="200px">
+          <mat-grid-tile>
+            <br>
+            <a><img class="center imagen" [src]="exp.imgUrl" alt="Logo empresa"></a>
+            <br>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <br>
+        <mat-card-title class="centrado">{{ exp.nombre }}</mat-card-title>
+        <br>
+        <mat-card-title class="centrado">{{ exp.empresa }}</mat-card-title>
+        <br>
+        <mat-card-subtitle class="centrado">{{ exp.resumen }}</mat-card-subtitle>
+        <br>
+        <br>
+        <mat-card-actions class="centrado">
+          @if (isAdmin()) {
+            <button mat-stroked-button color="accent" (click)="onOpenModal(exp, 'edit')">Editar</button>
+            <button mat-stroked-button color="accent" (click)="onOpenModal(exp, 'delete')">Borrar</button>
+          }
+        </mat-card-actions>
+      </div>
+    </mat-card>
+    } @empty {
+      <p class="text-center" style="color: white; padding: 20px;">No hay experiencias laborales registradas.</p>
+    }
+  </div>
+</mat-card>
+
+<div class="mt-3">
+  @if (isAdmin()) {
+    <button mat-button color="accent" (click)="onOpenModal(null!, 'add')">Agregar Experiencia</button>
+  }
+</div>
+
+<div class="modal fade" id="updateExperiencia" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar experiencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="mb-3">
+            <label class="form-label">Cargo</label>
+            <input type="text" [ngModel]="editExperiencia?.nombre" name="nombre" class="form-control" placeholder="Cargo">
+          </div>
+          <input type="hidden" [ngModel]="editExperiencia?.id" name="id">
+          <div class="mb-3">
+            <label class="form-label">Empresa</label>
+            <input type="text" [ngModel]="editExperiencia?.empresa" name="empresa" class="form-control" placeholder="Empresa">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Resumen</label>
+            <input type="text" [ngModel]="editExperiencia?.resumen" name="resumen" class="form-control" placeholder="Resumen">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Año de ingreso</label>
+            <input type="text" [ngModel]="editExperiencia?.fecha" name="fecha" class="form-control" placeholder="Año">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">URL del logo</label>
+            <input type="text" [ngModel]="editExperiencia?.imgUrl" name="imgUrl" class="form-control" placeholder="URL imagen">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button (click)="onUpdateExperiencia(editForm.value)" data-bs-dismiss="modal" class="btn btn-primary">Guardar cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteExperiencia" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Eliminar Experiencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Está seguro que desea borrar <strong>{{ deleteExperiencia?.nombre }}</strong>?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <button (click)="onDeleteExperiencia(deleteExperiencia!.id)" class="btn btn-danger" data-bs-dismiss="modal">Sí, borrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addExperiencia" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar experiencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddExperiencia(addForm)">
+          <div class="mb-3">
+            <label class="form-label">Nombre del cargo</label>
+            <input type="text" ngModel name="nombre" class="form-control" placeholder="Cargo" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Empresa</label>
+            <input type="text" ngModel name="empresa" class="form-control" placeholder="Empresa" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Resumen</label>
+            <input type="text" ngModel name="resumen" class="form-control" placeholder="Resumen breve" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Año de ingreso</label>
+            <input type="number" ngModel name="fecha" class="form-control" placeholder="Año" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">URL del logo</label>
+            <input type="text" ngModel name="imgUrl" class="form-control" placeholder="URL imagen" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="add-experiencia-form" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

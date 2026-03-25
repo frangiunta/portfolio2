@@ -1,0 +1,99 @@
+<mat-card>
+  @for (perfil of perfiles(); track perfil.id) {
+  <div id="main-container">
+    <div class="d-block mx-auto">
+      <img class="img-fluid" [src]="perfil.bannerlink" alt="Banner">
+    </div>
+    
+    <section class="bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 mb-4 mb-sm-5">
+            <div class="card card-style1 border-0">
+              <div class="card-body bg-dark p-1-9 p-sm-2-3 p-md-6 p-lg-7" id="gris">
+                <div class="row align-items-center">
+                  <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img id="fotoperfil" class="center" [src]="perfil.imgLink" [alt]="perfil.nombre">
+                  </div>
+                  
+                  <div class="col-lg-6 px-xl-10 text-center" id="gris">
+                    <div class="d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                      <br>
+                      <h3 class="mb-0 text-center" id="titulo">
+                        {{ perfil.nombre }}
+                      </h3>
+                      <br>
+                      <span class="text-center" id="subtitulo">
+                        {{ perfil.titulo }}
+                      </span>
+                      <br>
+                    </div>
+                    
+                    <div id="gris">
+                      <h2 id="texto" style="color:violet">{{ perfil.resumen }}</h2>
+                    </div>
+                    
+                    <div class="float-right btn-group btn-group-sm">
+                      @if (isAdmin()) {
+                        <button mat-button color="accent" (click)="onOpenModal(perfil, 'edit')">Editar</button>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  } @empty {
+    <p class="text-center p-4">Cargando perfil...</p>
+  }
+</mat-card>
+
+<div class="modal fade" id="updateEmployeeModal" tabindex="-1" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateEmployeeModalLabel">Editar datos personales</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="form-group mb-3">
+            <label for="nombre">Nombre y apellido</label>
+            <input type="text" [ngModel]="editPerfil?.nombre" name="nombre" class="form-control" id="nombre" placeholder="Nombre">
+          </div>
+          
+          <input type="hidden" [ngModel]="editPerfil?.id" name="id">
+          
+          <div class="form-group mb-3">
+            <label for="puesto">Título</label>
+            <input type="text" [ngModel]="editPerfil?.titulo" name="titulo" class="form-control" id="puesto" placeholder="Título">
+          </div>
+          
+          <div class="form-group mb-3">
+            <label for="ubicacion">Resumen</label>
+            <input type="text" [ngModel]="editPerfil?.resumen" name="resumen" class="form-control" id="ubicacion" placeholder="Resumen">
+          </div>
+          
+          <div class="form-group mb-3">
+            <label for="url_foto">URL de la foto de perfil</label>
+            <input type="text" [ngModel]="editPerfil?.imgLink" name="imgLink" class="form-control" id="url_foto" placeholder="URL Foto">
+          </div>
+          
+          <div class="form-group mb-3">
+            <label for="url_foto_banner">URL de la foto del banner</label>
+            <input type="text" [ngModel]="editPerfil?.bannerlink" name="bannerlink" class="form-control" id="url_foto_banner" placeholder="URL Banner">
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button (click)="onUpdatePerfil(editForm.value)" data-bs-dismiss="modal" class="btn btn-primary">Guardar cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
