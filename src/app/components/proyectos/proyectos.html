@@ -146,10 +146,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-bs-dismiss="modal">No, cancelar</button>
-        <button (click)="onDeleteProyecto(deleteProyecto!.id)" class="btn btn-danger" data-bs-dismiss="modal">Sí, borrar definitivamente</button>
+        <button (click)="onDeleteProyecto(deleteProyecto!.id!)" class="btn btn-danger" data-bs-dismiss="modal">Sí, borrar definitivamente</button>
       </div>
     </div>
   </div>
 </div>
-
-</mat-card>

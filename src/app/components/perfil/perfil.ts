@@ -8,11 +8,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { Perfil } from '../../interface/perfil';
 import { PerfilService } from '../../services/perfil';
 import { TokenService } from '../../services/token';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatButtonModule],
+  imports: [CommonModule, FormsModule, MatButtonModule, MatCardModule],
   templateUrl: './perfil.html',
   styleUrls: ['./perfil.css']
 })

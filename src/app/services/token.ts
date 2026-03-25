@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
-// Definimos las constantes fuera para mayor limpieza
 const TOKEN_KEY = 'AuthToken';
 const USERNAME_KEY = 'AuthUserName';
 const AUTHORITIES_KEY = 'AuthAuthorities';
@@ -9,60 +9,66 @@ const AUTHORITIES_KEY = 'AuthAuthorities';
   providedIn: 'root'
 })
 export class TokenService {
+  // Inyectamos el ID de plataforma para detectar el entorno
+  private readonly platformId = inject(PLATFORM_ID);
 
-  /**
-   * Guarda el token JWT. 
-   * Usamos el operador opcional para asegurar limpieza.
-   */
   public setToken(token: string): void {
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY, token);
+    if (isPlatformBrowser(this.platformId)) {
+      window.sessionStorage.removeItem(TOKEN_KEY);
+      window.sessionStorage.setItem(TOKEN_KEY, token);
+    }
   }
 
   public getToken(): string | null {
-    return sessionStorage.getItem(TOKEN_KEY);
+    if (isPlatformBrowser(this.platformId)) {
+      return sessionStorage.getItem(TOKEN_KEY);
+    }
+    return null;
   }
 
   public setUserName(userName: string): void {
-    window.sessionStorage.removeItem(USERNAME_KEY);
-    window.sessionStorage.setItem(USERNAME_KEY, userName);
+    if (isPlatformBrowser(this.platformId)) {
+      window.sessionStorage.removeItem(USERNAME_KEY);
+      window.sessionStorage.setItem(USERNAME_KEY, userName);
+    }
   }
 
   public getUserName(): string | null {
-    return sessionStorage.getItem(USERNAME_KEY);
+    if (isPlatformBrowser(this.platformId)) {
+      return sessionStorage.getItem(USERNAME_KEY);
+    }
+    return null;
   }
 
   public setAuthorities(authorities: string[]): void {
-    window.sessionStorage.removeItem(AUTHORITIES_KEY);
-    window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
+    if (isPlatformBrowser(this.platformId)) {
+      window.sessionStorage.removeItem(AUTHORITIES_KEY);
+      window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
+    }
   }
 
-  /**
-   * Retorna los roles del usuario. 
-   * Corregido para manejar correctamente el formato de Spring Security.
-   */
   public getAuthorities(): string[] {
     const roles: string[] = [];
-    const storedAuthorities = sessionStorage.getItem(AUTHORITIES_KEY);
-
-    if (storedAuthorities) {
-      try {
-        const parsed = JSON.parse(storedAuthorities);
-        parsed.forEach((authority: any) => {
-          // Maneja tanto string directo como objeto { authority: 'ROLE_...' }
-          roles.push(authority.authority || authority);
-        });
-      } catch (e) {
-        console.error('Error parseando autoridades:', e);
+    
+    if (isPlatformBrowser(this.platformId)) {
+      const storedAuthorities = sessionStorage.getItem(AUTHORITIES_KEY);
+      if (storedAuthorities) {
+        try {
+          const parsed = JSON.parse(storedAuthorities);
+          parsed.forEach((authority: any) => {
+            roles.push(authority.authority || authority);
+          });
+        } catch (e) {
+          console.error('Error parseando autoridades:', e);
+        }
       }
     }
     return roles;
   }
 
-  /**
-   * Limpia toda la sesión al cerrar sesión.
-   */
   public logOut(): void {
-    window.sessionStorage.clear();
+    if (isPlatformBrowser(this.platformId)) {
+      window.sessionStorage.clear();
+    }
   }
 }
