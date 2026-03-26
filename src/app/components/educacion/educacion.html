@@ -3,27 +3,32 @@
   <br>
   <div id="main-container">
     @for (edu of educaciones(); track edu.id) {
-    <mat-card class="mb-3">
-      <mat-grid-list cols="1" rowHeight="200px">
-        <mat-grid-tile>
-          <br>
-          <a><img class="center imagen" [src]="edu.imgUrl" alt="Logo institución"></a>
-          <br>
-        </mat-grid-tile>
-      </mat-grid-list>
-      <br>
-      <mat-card-title class="centrado">{{ edu.titulo }}</mat-card-title>
-      <br>
-      <mat-card-title class="centrado">{{ edu.institucion }}</mat-card-title>
-      <br>
-      <mat-card-subtitle class="centrado">{{ edu.fecha }}</mat-card-subtitle>
-      <br>
-      <mat-card-actions class="centrado">
-        @if (isAdmin()) {
-          <button mat-stroked-button color="accent" (click)="onOpenModal(edu, 'edit')">Editar</button>
-          <button mat-stroked-button color="accent" (click)="onOpenModal(edu, 'delete')">Borrar</button>
-        }
-      </mat-card-actions>
+    <mat-card class="mb-3 p-3">
+      <div class="d-flex align-items-start gap-4">
+        
+        <div class="flex-shrink-0">
+          <img [src]="edu.imgUrl" 
+               alt="Logo institución" 
+               class="rounded" 
+               style="width: 120px; height: 120px; object-fit: cover;">
+        </div>
+
+        <div class="flex-grow-1">
+          <mat-card-title class="mb-1 text-primary">{{ edu.titulo }}</mat-card-title>
+          <mat-card-subtitle class="mb-2 fw-bold text-dark">{{ edu.institucion }}</mat-card-subtitle>
+          <p class="text-muted mb-3">{{ edu.fecha }}</p>
+
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary" type="button" (click)="onOpenModal(edu, 'edit')">
+              Editar
+            </button>
+            <button class="btn btn-sm btn-outline-danger" type="button" (click)="onOpenModal(edu, 'delete')">
+              Borrar
+            </button>
+          </div>
+        </div>
+
+      </div>
     </mat-card>
     } @empty {
       <p class="text-center" style="color: white;">No se encontró información educativa.</p>
@@ -31,7 +36,7 @@
 
     @if (isAdmin()) {
       <div class="text-center mt-3">
-        <button mat-button color="accent" (click)="onOpenModal(null!, 'add')">Agregar Educación</button>
+         <button class="btn btn-success" type="button" (click)="onOpenModal(null!, 'add')">Agregar Educación</button>
       </div>
     }
   </div>
