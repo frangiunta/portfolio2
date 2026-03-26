@@ -53,13 +53,29 @@ export class ExperienciaComponent implements OnInit {
   }
 
   public onAddExperiencia(addForm: NgForm): void {
-    document.getElementById('add-experiencia-form')?.click();
+    console.log('Intentando agregar experiencia:', addForm.value);
+    console.log('Token actual:', this.tokenService.getToken());
+    
     this.experienciaService.addExperiencia(addForm.value).subscribe({
-      next: () => {
+      next: (response) => {
+        console.log('Experiencia agregada exitosamente:', response);
         this.getExperiencias();
         addForm.reset();
+        // Cerrar modal correctamente
+        const modal = document.getElementById('addExperiencia');
+        if (modal) {
+          const bsModal = new (window as any).bootstrap.Modal(modal);
+          bsModal.hide();
+        }
       },
-      error: () => addForm.reset()
+      error: (error: HttpErrorResponse) => {
+        console.error('❌ Error al agregar experiencia:');
+        console.error('Status:', error.status);
+        console.error('Mensaje:', error.message);
+        console.error('URL:', error.url);
+        console.error('Body:', error.error);
+        addForm.reset();
+      }
     });
   }
 
