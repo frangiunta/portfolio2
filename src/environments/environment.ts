@@ -1,3 +1,3 @@
 export const environment = {
-  apiBaseUrl: 'https://portfolio-franciscogiunta.herokuapp.com'
+  apiBaseUrl: 'https://portfolio-backend-6wbo.onrender.com'
 };
