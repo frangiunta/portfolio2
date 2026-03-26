@@ -36,7 +36,7 @@
       <ul class="navbar-nav">
         @if (!isLogged()) {
           <li class="nav-item">
-            <button mat-stroked-button color="warn" routerLink="/login">Login</button>
+            <button mat-stroked-button color="warn" (click)="openLoginModal()">Login</button>
           </li>
         } @else {
           <li class="nav-item">
@@ -47,3 +47,50 @@
     </div>
   </div>
 </nav>
+
+<!-- Modal de Login -->
+@if (showLoginForm()) {
+  <div class="modal fade show d-block" role="dialog" style="background-color: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Iniciar Sesión</h5>
+          <button type="button" class="btn-close" (click)="closeLoginModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+            <div class="mb-3">
+              <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
+              <input type="text" 
+                     class="form-control" 
+                     id="nombreUsuario"
+                     placeholder="Ingrese su usuario..."
+                     [(ngModel)]="nombreUsuario"
+                     name="nombreUsuario"
+                     required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" 
+                     class="form-control" 
+                     id="password"
+                     placeholder="Ingrese su contraseña..."
+                     [(ngModel)]="password"
+                     name="password"
+                     required>
+            </div>
+            @if (loginError()) {
+              <div class="alert alert-danger" role="alert">
+                {{ loginError() }}
+              </div>
+            }
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeLoginModal()">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="onLogin()" [disabled]="!nombreUsuario() || !password()">Ingresar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
