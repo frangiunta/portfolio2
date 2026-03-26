@@ -48,32 +48,34 @@
 <!-- Modal de Login -->
 @if (showLoginForm()) {
   <div class="modal fade show d-block" role="dialog" style="background-color: rgba(0,0,0,0.5);">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered animate-fade-in">
+      <div class="modal-content" style="border-radius: 15px; overflow: hidden;">
         <div class="modal-header">
-          <h5 class="modal-title">Iniciar Sesión</h5>
+          <h5 class="modal-title" style="color: black; font-size: 25px; font-weight: bold;">Iniciar Sesión</h5>
           <button type="button" class="btn-close" (click)="closeLoginModal()"></button>
         </div>
         <div class="modal-body">
           <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-            <div class="mb-3">
-              <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
+            <div class="mb-3 animate-fade-in" style="animation-delay: 0.2s;">
+              <label for="nombreUsuario" class="form-label" style="color: black; font-size: 25px;">Nombre de Usuario</label>
               <input type="text" 
                      class="form-control" 
                      id="nombreUsuario"
                      placeholder="Ingrese su usuario..."
                      [(ngModel)]="nombreUsuario"
                      name="nombreUsuario"
+                     style="font-size: 25px; color: black;"
                      required>
             </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Contraseña</label>
+            <div class="mb-3 animate-fade-in" style="animation-delay: 0.4s;">
+              <label for="password" class="form-label" style="color: black; font-size: 25px;">Contraseña</label>
               <input type="password" 
                      class="form-control" 
                      id="password"
                      placeholder="Ingrese su contraseña..."
                      [(ngModel)]="password"
                      name="password"
+                     style="font-size: 25px; color: black;"
                      required>
             </div>
             @if (loginError()) {
@@ -83,9 +85,9 @@
             }
           </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closeLoginModal()">Cancelar</button>
-          <button type="button" class="btn btn-primary" (click)="onLogin()" [disabled]="!nombreUsuario() || !password()">Ingresar</button>
+        <div class="modal-footer animate-fade-in" style="animation-delay: 0.6s;">
+          <button type="button" class="btn btn-secondary" style="font-size: 25px;" (click)="closeLoginModal()">Cancelar</button>
+          <button type="button" class="btn btn-primary" style="font-size: 25px; color: white;" (click)="onLogin()" [disabled]="!nombreUsuario() || !password()">Ingresar</button>
         </div>
       </div>
     </div>

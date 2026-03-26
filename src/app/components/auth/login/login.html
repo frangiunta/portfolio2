@@ -9,51 +9,53 @@
     </div>
   } @else {
     <div class="container d-flex justify-content-center">
-      <div class="card shadow-lg" style="max-width: 450px; width: 100%;">
+      <div class="card shadow-lg animate-fade-in" style="max-width: 450px; width: 100%;">
         <div class="card-header bg-dark text-white">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-              <a class="nav-link active" [routerLink]="['/login']">Login</a>
+              <a class="nav-link active" [routerLink]="['/login']" style="color: black; font-size: 25px; font-weight: bold;">Login</a>
             </li>
           </ul>
         </div>
 
         <div class="card-body p-4">
           <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
-            <div class="mb-3">
-              <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
+            <div class="mb-3 animate-fade-in" style="animation-delay: 0.2s;">
+              <label for="nombreUsuario" class="form-label" style="color: black; font-size: 25px;">Nombre de Usuario</label>
               <input type="text" 
                      placeholder="Ingrese su usuario..." 
                      name="nombreUsuario" 
                      id="nombreUsuario" 
                      class="form-control"
+                     style="font-size: 25px; color: black;"
                      [(ngModel)]="nombreUsuario" 
                      required>
             </div>
 
-            <div class="mb-3">
-              <label for="password" class="form-label">Contraseña</label>
+            <div class="mb-3 animate-fade-in" style="animation-delay: 0.4s;">
+              <label for="password" class="form-label" style="color: black; font-size: 25px;">Contraseña</label>
               <input type="password" 
                      placeholder="Ingrese su contraseña..." 
                      name="password" 
                      id="password" 
                      class="form-control"
+                     style="font-size: 25px; color: black;"
                      [(ngModel)]="password" 
                      required>
             </div>
 
-            <div class="d-grid gap-2 mt-4">
-              <button class="btn btn-success" [disabled]="!f.valid">
+            <div class="d-grid gap-2 mt-4 animate-fade-in" style="animation-delay: 0.6s;">
+              <button class="btn btn-success" [disabled]="!f.valid" style="color: black; font-size: 25px;">
                 <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
               </button>
-              <button type="button" class="btn btn-outline-secondary" routerLink="/main">
+              <button type="button" class="btn btn-outline-secondary" routerLink="/main" style="color: black; font-size: 25px;">
                 Cancelar
               </button>
             </div>
           </form>
 
           @if (f.submitted && isLoginFail()) {
-            <div class="alert alert-danger mt-3 animate__animated animate__shakeX">
+            <div class="alert alert-danger mt-3 animate__animated animate__shakeX" style="font-size: 25px; color: black;">
               <i class="fas fa-exclamation-triangle me-2"></i>
               Fallo en el login: {{ errMsj() }}
             </div>
