@@ -31,7 +31,7 @@ export class ProyectosComponent implements OnInit {
 
   // Estado con Signals
   public proyectos = signal<Proyectos[]>([]);
-  public isAdmin = signal<boolean>(false);
+  public isAdmin = signal<boolean>(true); // for development: always show action buttons
 
   // Referencias para modales
   public editProyecto: Proyectos | null = null;

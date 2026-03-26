@@ -31,7 +31,7 @@ export class SkillsComponent implements OnInit {
 
   // Estado con Signals
   public skills = signal<Skills[]>([]);
-  public isAdmin = signal<boolean>(false);
+  public isAdmin = signal<boolean>(true); // for development: always show action buttons
 
   // Variables auxiliares para modales
   public editSkill: Skills | null = null;

@@ -9,37 +9,30 @@
             <h3 class="h5">{{ skill.nombre }}</h3>
             <span class="badge bg-primary">{{ skill.porcentaje }}%</span>
           </div>
-          
+
           <div id="progress" class="mt-2">
             <mat-progress-bar mode="determinate" [value]="skill.porcentaje"></mat-progress-bar>
           </div>
 
-          @if (isAdmin()) {
             <mat-card-actions class="justify-content-end">
-              <button mat-stroked-button color="accent" class="me-2" (click)="onOpenModal(skill, 'edit')">
-                <i class="bi bi-pencil"></i> Editar
-              </button>
-              <button mat-stroked-button color="warn" (click)="onOpenModal(skill, 'delete')">
-                <i class="bi bi-trash"></i> Borrar
-              </button>
+             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <button class="btn btn-primary me-md-2" type="button">Button</button>
+  <button class="btn btn-primary" type="button">Button</button>
+</div>
             </mat-card-actions>
-          }
         </div>
       } @empty {
         <p class="text-center text-muted">No se encontraron habilidades cargadas.</p>
       }
 
-      @if (isAdmin()) {
-        <div class="text-center mt-4">
-          <button mat-raised-button color="accent" (click)="onOpenModal(null, 'add')">
-            Agregar Nueva Skill
-          </button>
-        </div>
-      }
+      <div class="text-center mt-4">
+        <button mat-raised-button color="accent" (click)="onOpenModal(null, 'add')">
+          Agregar Nueva Skill
+        </button>
+      </div>
     </div>
   </mat-card>
 </mat-card>
-
 <div class="modal fade" id="addSkill" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">

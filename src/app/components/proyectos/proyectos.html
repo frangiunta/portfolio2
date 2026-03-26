@@ -20,20 +20,15 @@
             </mat-card-content>
 
             <mat-card-actions class="justify-content-center pb-3">
-              @if (proyecto.gitlink) {
-                <a mat-icon-button [href]="proyecto.gitlink" target="_blank" color="primary" title="Ver Código">
-                  <i class="bi bi-github"></i>
-                </a>
-              }
-              
-              @if (isAdmin()) {
-                <button mat-stroked-button color="accent" (click)="onOpenModal(proyecto, 'edit')" class="mx-1">
-                  Editar
-                </button>
-                <button mat-stroked-button color="warn" (click)="onOpenModal(proyecto, 'delete')">
-                  Borrar
-                </button>
-              }
+              <a *ngIf="proyecto.gitlink" mat-icon-button [href]="proyecto.gitlink" target="_blank" color="primary" title="Ver Código">
+                <i class="bi bi-github"></i>
+              </a>
+              <button mat-stroked-button color="accent" (click)="onOpenModal(proyecto, 'edit')" class="mx-1">
+                Editar
+              </button>
+              <button mat-stroked-button color="warn" (click)="onOpenModal(proyecto, 'delete')">
+                Borrar
+              </button>
             </mat-card-actions>
           </mat-card>
         </div>
@@ -45,13 +40,11 @@
     </div>
   </div>
 
-  @if (isAdmin()) {
-    <div class="text-center mt-4">
-      <button mat-raised-button color="accent" (click)="onOpenModal(null, 'add')">
-        <i class="bi bi-plus-circle me-1"></i> Agregar Proyecto
-      </button>
-    </div>
-  }
+  <div class="text-center mt-4">
+    <button mat-raised-button color="accent" (click)="onOpenModal(null, 'add')">
+      <i class="bi bi-plus-circle me-1"></i> Agregar Proyecto
+    </button>
+  </div>
 </mat-card>
 
 <div class="modal fade" id="addProyecto" tabindex="-1" aria-hidden="true">
