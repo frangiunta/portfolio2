@@ -18,7 +18,7 @@
           <mat-card-title class="mb-1 text-primary">{{ exp.nombre }}</mat-card-title>
           <mat-card-subtitle class="mb-2 fw-bold text-dark">{{ exp.empresa }}</mat-card-subtitle>
           <p class="text-muted mb-3">{{ exp.resumen }}</p>
-
+@if (isAdmin()) { 
           <div class="d-flex gap-2">
             <button class="btn btn-sm btn-outline-primary" type="button" (click)="onOpenModal(exp, 'edit')">
               Editar
@@ -27,7 +27,9 @@
               Borrar
             </button>
           </div>
+}
         </div>
+
       </div>
     </mat-card>
   } @empty {
