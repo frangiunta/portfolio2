@@ -25,10 +25,10 @@
                       <i class="bi bi-github me-1"></i> Ver en GitHub
                     </a>  
                     @if (isAdmin()) { 
-                      <button mat-stroked-button color="accent" (click)="onOpenModal(proyecto, 'edit')" class="mx-1">
+                      <button class="btn btn-sm btn-outline-pink mx-1" type="button" (click)="onOpenModal(proyecto, 'edit')">
                         Editar
                       </button>
-                      <button mat-stroked-button color="warn" (click)="onOpenModal(proyecto, 'delete')">
+                      <button class="btn btn-sm btn-outline-danger" type="button" (click)="onOpenModal(proyecto, 'delete')">
                         Borrar
                       </button>
                     }
@@ -55,7 +55,7 @@
   </div>
 @if (isAdmin()) {
   <div class="text-center mt-4">
-    <button mat-raised-button color="accent" (click)="onOpenModal(null, 'add')">
+    <button class="btn btn-pink" type="button" (click)="onOpenModal(null, 'add')">
       <i class="bi bi-plus-circle me-1"></i> Agregar Proyecto
     </button>
   </div>}
@@ -94,7 +94,7 @@
           </div>
           <div class="modal-footer px-0 pb-0">
             <button type="button" id="add-proyecto-close" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Guardar Proyecto</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-pink">Guardar Proyecto</button>
           </div>
         </form>
       </div>
@@ -132,7 +132,7 @@
           </div>
           <div class="modal-footer px-0 pb-0">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button (click)="onUpdateProyecto(editForm.value)" data-bs-dismiss="modal" class="btn btn-primary">Guardar Cambios</button>
+            <button (click)="onUpdateProyecto(editForm.value)" data-bs-dismiss="modal" class="btn btn-pink">Guardar Cambios</button>
           </div>
         </form>
       </div>

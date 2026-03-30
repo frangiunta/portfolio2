@@ -4,7 +4,6 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 // Angular Material
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 // Servicios e Interfaces
 import { SkillsService } from '../../services/skills';
@@ -18,7 +17,6 @@ import { TokenService } from '../../services/token';
     CommonModule, 
     FormsModule, 
     MatProgressBarModule, 
-    MatButtonModule, 
     MatCardModule
   ],
   templateUrl: './skills.html',

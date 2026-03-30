@@ -3,30 +3,41 @@
 
   <mat-card class="bg-dark p-3 shadow-sm">
     <div id="main-container">
-      @for (skill of skills(); track skill.id) {
+      @for (skill of skills(); track skill.id; let i = $index) {
         <div class="skill-item mb-4">
           <div class="d-flex justify-content-between align-items-center">
             <h3 class="h5">{{ skill.nombre }}</h3>
-            <span class="badge bg-primary">{{ skill.porcentaje }}%</span>
+            <span class="badge" [ngClass]="['bg-primary', 'bg-success', 'bg-info', 'bg-warning', 'bg-danger'][i % 5]">{{ skill.porcentaje }}%</span>
           </div>
 
-          <div id="progress" class="mt-2">
-            <mat-progress-bar mode="determinate" [value]="skill.porcentaje"></mat-progress-bar>
+          <div class="progress mt-2" style="height: 15px;">
+            <div class="progress-bar"
+                 [ngClass]="['bg-primary', 'bg-success', 'bg-info', 'bg-warning', 'bg-danger'][i % 5]"
+                 role="progressbar"
+                 [style.width.%]="skill.porcentaje"
+                 [attr.aria-valuenow]="skill.porcentaje"
+                 aria-valuemin="0"
+                 aria-valuemax="100">
+            </div>
           </div>
 
-            <mat-card-actions class="justify-content-end">
-             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <button class="btn btn-primary me-md-2" type="button">Button</button>
-  <button class="btn btn-primary" type="button">Button</button>
-</div>
-            </mat-card-actions>
+          @if (isAdmin()) {
+            <div class="d-flex justify-content-end gap-2 mt-2">
+              <button class="btn btn-sm btn-outline-pink" type="button" (click)="onOpenModal(skill, 'edit')">
+                Editar
+              </button>
+              <button class="btn btn-sm btn-outline-danger" type="button" (click)="onOpenModal(skill, 'delete')">
+                Borrar
+              </button>
+            </div>
+          }
         </div>
       } @empty {
         <p class="text-center text-muted">No se encontraron habilidades cargadas.</p>
       }
 @if (isAdmin()) {
       <div class="text-center mt-4">
-        <button mat-raised-button color="accent" (click)="onOpenModal(null, 'add')">
+        <button class="btn btn-pink" type="button" (click)="onOpenModal(null, 'add')">
           Agregar Nueva Skill
         </button>
       </div>}
@@ -53,7 +64,7 @@
           </div>
           <div class="modal-footer px-0 pb-0">
             <button type="button" id="add-skill-close" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Guardar Skill</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-pink">Guardar Skill</button>
           </div>
         </form>
       </div>
@@ -81,7 +92,7 @@
           </div>
           <div class="modal-footer px-0 pb-0">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button (click)="onUpdateSkill(editForm.value)" data-bs-dismiss="modal" class="btn btn-primary">Guardar Cambios</button>
+            <button (click)="onUpdateSkill(editForm.value)" data-bs-dismiss="modal" class="btn btn-pink">Guardar Cambios</button>
           </div>
         </form>
       </div>
@@ -114,4 +125,3 @@
 
               
             
-

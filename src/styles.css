@@ -24,3 +24,76 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #444;
 }
+
+/*
+ * =========================================
+ * Estilos para Modales en Tema Oscuro
+ * =========================================
+ */
+
+/* Fondo del modal (backdrop) más oscuro */
+.modal-backdrop.show {
+  opacity: 0.8; /* Valor por defecto es 0.5, lo aumentamos */
+}
+
+.modal-content {
+  background-color: #2d2d2d; /* Gris oscuro consistente con las tarjetas */
+  color: #f8f9fa;           /* Texto blanco suave */
+  border: 1px solid #444;
+}
+
+.modal-header {
+  border-bottom-color: #444;
+}
+
+/* Asegura que el botón de cierre sea visible en el fondo oscuro */
+.modal-header .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Estilos para los formularios dentro de los modales */
+.modal-body .form-control {
+  background-color: #495057; /* Un gris más claro para el campo de entrada */
+  color: #f8f9fa;
+  border-color: #6c757d;
+}
+
+.modal-body .form-control::placeholder {
+  color: #adb5bd;
+}
+
+.modal-footer {
+  border-top-color: #444;
+}
+
+/*
+ * =========================================
+ * Estilos para Botones y Textos Rosados (Pink)
+ * =========================================
+ */
+
+.btn-pink {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #e83e8c;
+  --bs-btn-border-color: #e83e8c;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #d63384;
+  --bs-btn-hover-border-color: #ca317c;
+}
+
+.btn-outline-pink {
+  --bs-btn-color: #e83e8c;
+  --bs-btn-border-color: #e83e8c;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #e83e8c;
+  --bs-btn-hover-border-color: #e83e8c;
+}
+
+.text-pink {
+  color: #e83e8c !important;
+}
+
+/* Para que el color de la barra de rango en skills coincida */
+.form-range::-webkit-slider-thumb {
+  background-color: #e83e8c;
+}

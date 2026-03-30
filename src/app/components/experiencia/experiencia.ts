@@ -4,7 +4,6 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 // Angular Material
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { Experiencia } from '../../interface/experiencia';
@@ -14,7 +13,7 @@ import { TokenService } from '../../services/token';
 @Component({
   selector: 'app-experiencia',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatCardModule, MatButtonModule, MatGridListModule],
+  imports: [CommonModule, FormsModule, MatCardModule, MatGridListModule],
   templateUrl: './experiencia.html',
   styleUrls: ['./experiencia.css']
 })
