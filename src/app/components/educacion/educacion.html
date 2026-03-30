@@ -19,14 +19,16 @@
           <mat-card-subtitle class="mb-2 fw-bold text-dark">{{ edu.institucion }}</mat-card-subtitle>
           <p class="text-muted mb-3">{{ edu.fecha }}</p>
 
-          <div class="d-flex gap-2">
-            <button class="btn btn-sm btn-outline-primary" type="button" (click)="onOpenModal(edu, 'edit')">
-              Editar
-            </button>
-            <button class="btn btn-sm btn-outline-danger" type="button" (click)="onOpenModal(edu, 'delete')">
-              Borrar
-            </button>
-          </div>
+          @if (isAdmin()) {
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-outline-primary" type="button" (click)="onOpenModal(edu, 'edit')">
+                Editar
+              </button>
+              <button class="btn btn-sm btn-outline-danger" type="button" (click)="onOpenModal(edu, 'delete')">
+                Borrar
+              </button>
+            </div>
+          }
         </div>
 
       </div>
