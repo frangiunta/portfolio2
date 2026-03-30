@@ -24,13 +24,14 @@
       } @empty {
         <p class="text-center text-muted">No se encontraron habilidades cargadas.</p>
       }
-
+@if (isAdmin()) {
       <div class="text-center mt-4">
         <button mat-raised-button color="accent" (click)="onOpenModal(null, 'add')">
           Agregar Nueva Skill
         </button>
-      </div>
+      </div>}
     </div>
+
   </mat-card>
 </mat-card>
 <div class="modal fade" id="addSkill" tabindex="-1" aria-hidden="true">

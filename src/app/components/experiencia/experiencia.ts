@@ -27,9 +27,9 @@ export class ExperienciaComponent implements OnInit {
   public experiencias = signal<Experiencia[]>([]);
   public isAdmin = signal<boolean>(false);
   
-  public editExperiencia?: Experiencia;
-  public deleteExperiencia?: Experiencia;
-  public experiencia?: Experiencia;
+  public editExperiencia: Experiencia | null = null;
+  public deleteExperiencia: Experiencia | null = null;
+  public experiencia: Experiencia | null = null;
 
   ngOnInit(): void {
     this.getExperiencias();
@@ -93,24 +93,21 @@ export class ExperienciaComponent implements OnInit {
     });
   }
 
-  public onOpenModal(experiencia: Experiencia, mode?: string): void {
+  public onOpenModal(experiencia: Experiencia | null, mode?: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
     button.style.display = 'none';
-    
+
     // Compatibilidad Bootstrap 5
     button.setAttribute('data-bs-toggle', 'modal');
-    
+
     if (mode === 'edit') {
       this.editExperiencia = experiencia;
       button.setAttribute('data-bs-target', '#updateExperiencia');
-    }
-    if (mode === 'add') {
-      this.experiencia = experiencia;
+    } else if (mode === 'add') {
       button.setAttribute('data-bs-target', '#addExperiencia');
-    }
-    if (mode === 'delete') {
+    } else if (mode === 'delete') {
       this.deleteExperiencia = experiencia;
       button.setAttribute('data-bs-target', '#deleteExperiencia');
     }
