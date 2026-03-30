@@ -97,20 +97,17 @@ import { TokenService } from '../../../services/token';
   `]
 })
 export class LoginModalComponent implements OnInit {
-  // Inyectamos los servicios
   private authService = inject(AuthService);
   private tokenService = inject(TokenService);
   private router = inject(Router);
   private dialogRef = inject(MatDialogRef<LoginModalComponent>);
 
-  // Estado del componente
   nombreUsuario: string = '';
   password: string = '';
   errorMessage: string = '';
   roles = signal<string[]>([]);
 
   ngOnInit(): void {
-    // Verificar si ya está logueado
     if (this.tokenService.getToken()) {
       this.roles.set(this.tokenService.getAuthorities());
     }
@@ -133,7 +130,6 @@ export class LoginModalComponent implements OnInit {
         this.tokenService.setUserName(data.nombreUsuario);
         this.tokenService.setAuthorities(data.authorities);
         
-        // Cerrar el modal con éxito
         this.dialogRef.close(true);
       },
       error: (err: any) => {

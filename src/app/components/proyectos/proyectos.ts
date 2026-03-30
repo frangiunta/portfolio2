@@ -2,11 +2,9 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormsModule, NgForm } from '@angular/forms';
-// Angular Material
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-// Servicios e Interfaces
 import { Proyectos } from '../../interface/proyectos';
 import { ProyectosService } from '../../services/proyectos';
 import { TokenService } from '../../services/token';
@@ -25,15 +23,12 @@ import { TokenService } from '../../services/token';
   styleUrls: ['./proyectos.css']
 })
 export class ProyectosComponent implements OnInit {
-  // Inyección moderna
   private proyectosService = inject(ProyectosService);
   private tokenService = inject(TokenService);
 
-  // Estado con Signals
   public proyectos = signal<Proyectos[]>([]);
-  public isAdmin = signal<boolean>(true); // for development: always show action buttons
+  public isAdmin = signal<boolean>(true); 
 
-  // Referencias para modales
   public editProyecto: Proyectos | null = null;
   public deleteProyecto: Proyectos | null = null;
 
@@ -59,7 +54,6 @@ export class ProyectosComponent implements OnInit {
   }
 
   public onAddProyecto(addForm: NgForm): void {
-    // Bootstrap 5: Cerrar modal manualmente si es necesario
     document.getElementById('add-proyecto-close')?.click();
 
     this.proyectosService.addProyecto(addForm.value).subscribe({

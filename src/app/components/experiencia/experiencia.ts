@@ -2,7 +2,6 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-// Angular Material
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 
@@ -18,11 +17,9 @@ import { TokenService } from '../../services/token';
   styleUrls: ['./experiencia.css']
 })
 export class ExperienciaComponent implements OnInit {
-  // Inyección moderna
   private experienciaService = inject(ExperienciaService);
   private tokenService = inject(TokenService);
 
-  // Estado con Signals
   public experiencias = signal<Experiencia[]>([]);
   public isAdmin = signal<boolean>(false);
   
@@ -60,7 +57,6 @@ export class ExperienciaComponent implements OnInit {
         console.log('Experiencia agregada exitosamente:', response);
         this.getExperiencias();
         addForm.reset();
-        // Cerrar modal correctamente
         const modal = document.getElementById('addExperiencia');
         if (modal) {
           const bsModal = new (window as any).bootstrap.Modal(modal);
@@ -98,7 +94,6 @@ export class ExperienciaComponent implements OnInit {
     button.type = 'button';
     button.style.display = 'none';
 
-    // Compatibilidad Bootstrap 5
     button.setAttribute('data-bs-toggle', 'modal');
 
     if (mode === 'edit') {

@@ -1,9 +1,9 @@
 export interface Proyectos {
-  id?: number;          // Opcional para nuevos registros
+  id?: number;          
   nombre: string;
-  descripcion: string;  // Descripción corta (ej: "Desarrollo Web")
-  resumen: string;      // Detalle más largo de las tecnologías
-  imglink: string;      // URL de la imagen de portada
-  gitlink: string;      // URL del repositorio en GitHub
-  proyectoCode: string; // Tu identificador único de backend
+  descripcion: string;  
+  resumen: string;      
+  imglink: string;      
+  gitlink: string;      
+  proyectoCode: string; 
 }

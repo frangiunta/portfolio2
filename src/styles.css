@@ -1,16 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
-/* Estilos globales */
 html, body { 
   height: 100%; 
   margin: 0; 
-  background-color: #000; /* Fondo negro por defecto para evitar destellos blancos */
+  background-color: #000; 
 }
 
 body { 
   font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
 
-/* Scrollbar personalizada para que combine con el modo oscuro */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -25,20 +22,13 @@ body {
   background: #444;
 }
 
-/*
- * =========================================
- * Estilos para Modales en Tema Oscuro
- * =========================================
- */
-
-/* Fondo del modal (backdrop) más oscuro */
 .modal-backdrop.show {
-  opacity: 0.8; /* Valor por defecto es 0.5, lo aumentamos */
+  opacity: 0.8; 
 }
 
 .modal-content {
-  background-color: #2d2d2d; /* Gris oscuro consistente con las tarjetas */
-  color: #f8f9fa;           /* Texto blanco suave */
+  background-color: #2d2d2d; 
+  color: #f8f9fa;           
   border: 1px solid #444;
 }
 
@@ -46,14 +36,11 @@ body {
   border-bottom-color: #444;
 }
 
-/* Asegura que el botón de cierre sea visible en el fondo oscuro */
 .modal-header .btn-close {
   filter: invert(1) grayscale(100%) brightness(200%);
 }
-
-/* Estilos para los formularios dentro de los modales */
 .modal-body .form-control {
-  background-color: #495057; /* Un gris más claro para el campo de entrada */
+  background-color: #495057; 
   color: #f8f9fa;
   border-color: #6c757d;
 }
@@ -65,12 +52,6 @@ body {
 .modal-footer {
   border-top-color: #444;
 }
-
-/*
- * =========================================
- * Estilos para Botones y Textos Rosados (Pink)
- * =========================================
- */
 
 .btn-pink {
   --bs-btn-color: #fff;
@@ -93,7 +74,6 @@ body {
   color: #e83e8c !important;
 }
 
-/* Para que el color de la barra de rango en skills coincida */
 .form-range::-webkit-slider-thumb {
   background-color: #e83e8c;
 }
