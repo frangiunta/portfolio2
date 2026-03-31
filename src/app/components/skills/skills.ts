@@ -25,7 +25,7 @@ export class SkillsComponent implements OnInit {
   private tokenService = inject(TokenService);
 
   public skills = signal<Skills[]>([]);
-  public isAdmin = signal<boolean>(true); 
+  public isAdmin = signal<boolean>(false); 
 
   public editSkill: Skills | null = null;
   public deleteSkill: Skills | null = null;

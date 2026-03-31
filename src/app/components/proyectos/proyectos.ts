@@ -27,7 +27,7 @@ export class ProyectosComponent implements OnInit {
   private tokenService = inject(TokenService);
 
   public proyectos = signal<Proyectos[]>([]);
-  public isAdmin = signal<boolean>(true); 
+  public isAdmin = signal<boolean>(false); 
 
   public editProyecto: Proyectos | null = null;
   public deleteProyecto: Proyectos | null = null;
