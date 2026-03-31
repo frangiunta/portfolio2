@@ -77,3 +77,7 @@ body {
 .form-range::-webkit-slider-thumb {
   background-color: #e83e8c;
 }
+
+.background {
+  background-color: #161616;
+}

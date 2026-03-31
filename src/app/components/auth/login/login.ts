@@ -14,7 +14,6 @@ import { FormsModule } from '@angular/forms'; // Necesario para ngModel
   styleUrls: ['./login.css']
 })
 export class LoginComponent implements OnInit {
-  // Inyectamos los servicios de forma moderna
   private readonly tokenService = inject(TokenService);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
@@ -23,7 +22,6 @@ export class LoginComponent implements OnInit {
   isLogged = signal<boolean>(false);
   isLoginFail = signal<boolean>(false);
   
-  // Variables para el formulario (vinculadas con [(ngModel)])
   nombreUsuario = '';
   password = '';
   
@@ -31,18 +29,16 @@ export class LoginComponent implements OnInit {
   errMsj = signal<string>('');
 
   ngOnInit(): void {
-    // Verificamos si ya hay un token al cargar
     if (this.tokenService.getToken()) {
       this.isLogged.set(true);
       this.isLoginFail.set(false);
       this.roles = this.tokenService.getAuthorities();
-      // Si ya está logueado, lo mandamos al main directamente
+
       this.router.navigate(['/main']);
     }
   }
 
   onLogin(): void {
-    // Creamos el objeto directamente (ya no necesitamos 'new' porque es interface)
     const loginUsuario: Login = {
       nombreUsuario: this.nombreUsuario,
       password: this.password
@@ -53,15 +49,16 @@ export class LoginComponent implements OnInit {
         this.isLogged.set(true);
         this.isLoginFail.set(false);
 
-        // Guardamos los datos en el storage
+
         this.tokenService.setToken(data.token);
         this.tokenService.setUserName(data.nombreUsuario);
         this.tokenService.setAuthorities(data.authorities);
         
         this.roles = data.authorities;
-        
-        // Navegamos al componente principal
-        this.router.navigate(['/main']);
+      
+        this.router.navigate(['/main']).then(() => {
+          window.location.reload();
+        });
       },
       error: (err) => {
         this.isLogged.set(false);

@@ -131,6 +131,7 @@ export class LoginModalComponent implements OnInit {
         this.tokenService.setAuthorities(data.authorities);
         
         this.dialogRef.close(true);
+        window.location.reload();
       },
       error: (err: any) => {
         console.error('Error en login:', err);

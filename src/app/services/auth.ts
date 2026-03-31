@@ -14,8 +14,8 @@ export class AuthService {
 
   private readonly authURL = 'https://portfolio-franciscogiunta.herokuapp.com/auth/';
 
-  private readonly ADMIN_USER = 'Admin';
-  private readonly ADMIN_PASSWORD = 'Admin';
+  private readonly ADMIN_USER = 'franciscogiunta';
+  private readonly ADMIN_PASSWORD = 'portfolioapp';
 
   public nuevo(nuevoUsuario: NewUser): Observable<any> {
     return this.http.post<any>(`${this.authURL}nuevo`, nuevoUsuario);
