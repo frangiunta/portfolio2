@@ -9,6 +9,7 @@ import { EducacionComponent } from '../educacion/educacion';
 import { FooterComponent } from '../footer/footer';
 import { SkillsComponent } from "../skills/skills";
 import { ProyectosComponent } from "../proyectos/proyectos";
+import { BackgroundComponent } from '../background/background';
 // Nota: Importa Skills y Proyectos cuando los tengamos listos
 
 @Component({
@@ -22,7 +23,8 @@ import { ProyectosComponent } from "../proyectos/proyectos";
     EducacionComponent,
     FooterComponent,
     SkillsComponent,
-    ProyectosComponent
+    ProyectosComponent,
+    BackgroundComponent
 ],
   templateUrl: './main.html',
   styleUrls: ['./main.css']

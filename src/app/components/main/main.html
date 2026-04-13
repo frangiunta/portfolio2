@@ -1,7 +1,10 @@
-<app-toolbar></app-toolbar>
+<app-background></app-background>
 
-<main class="container-fluid p-0">
-  <section id="perfil">
+<!-- Contenedor principal elevado por encima del fondo animado -->
+<div style="position: relative; z-index: 1;">
+  <app-toolbar></app-toolbar>
+  <main class="container-fluid p-0">
+    <section id="perfil">
     <app-perfil></app-perfil>
   </section>
 
@@ -20,4 +23,5 @@
   </section>    
   </main>
 
-<app-footer></app-footer>
+  <app-footer></app-footer>
+</div>
