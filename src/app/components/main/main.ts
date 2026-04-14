@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { App } from '../../app';
+import { BackgroundComponent } from '../background/background';
 import { ToolbarComponent } from '../toolbar/toolbar';
 import { PerfilComponent } from '../perfil/perfil';
 import { ExperienciaComponent } from '../experiencia/experiencia';
@@ -20,7 +21,9 @@ import { ProyectosComponent } from "../proyectos/proyectos";
     EducacionComponent,
     FooterComponent,
     SkillsComponent,
-    ProyectosComponent
+    ProyectosComponent,
+    BackgroundComponent,
+    App
 ],
   templateUrl: './main.html',
   styleUrls: ['./main.css']

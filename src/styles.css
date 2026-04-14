@@ -78,6 +78,13 @@ body {
   background-color: #e83e8c;
 }
 
-.background {
-  background-color: #161616;
+main.container-fluid {
+  position: relative;
+  z-index: 1; /* Para que quede por encima del canvas */
+  background-color: transparent !important;
+}
+
+section {
+  /* Asegúrate de que las secciones tampoco tapen el fondo si no lo deseas */
+  background-color: transparent; 
 }
