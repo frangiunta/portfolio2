@@ -11,17 +11,15 @@ import { TokenService } from '../../services/token';
 
 @Component({
   selector: 'app-educacion',
-  standalone: true, // Indica que es un componente autónomo
-  imports: [CommonModule, FormsModule, MatCardModule, MatGridListModule, MatButtonModule], // Importamos lo que antes estaba en AppModule
+  standalone: true, 
+  imports: [CommonModule, FormsModule, MatCardModule, MatGridListModule, MatButtonModule], 
   templateUrl: './educacion.html',
   styleUrls: ['./educacion.css']
 })
 export class EducacionComponent implements OnInit {
-  // Inyección de servicios moderna
   private educacionService = inject(EducacionService);
   private tokenService = inject(TokenService);
 
-  // Usamos Signals para el estado (más eficiente)
   public educaciones = signal<Educacion[]>([]);
   public editEducacion?: Educacion;
   public deleteEducacion?: Educacion;
@@ -51,7 +49,6 @@ export class EducacionComponent implements OnInit {
   }
 
   public onAddEducacion(addForm: NgForm): void {
-    // Cerramos el modal usando la API de Bootstrap (si la usas) o el click manual
     document.getElementById('add-educacion-form')?.click();
 
     this.educacionService.addEducacion(addForm.value).subscribe({
@@ -79,13 +76,12 @@ export class EducacionComponent implements OnInit {
     });
   }
 
-  // Lógica de Modales (Se mantiene igual, pero con chequeos de nulidad)
   public onOpenModal(educacion: Educacion, mode?: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
     button.style.display = 'none';
-    button.setAttribute('data-bs-toggle', 'modal'); // Actualizado a Bootstrap 5 (data-bs)
+    button.setAttribute('data-bs-toggle', 'modal'); 
 
     if (mode === 'edit') {
       this.editEducacion = educacion;
@@ -102,6 +98,6 @@ export class EducacionComponent implements OnInit {
 
     container?.appendChild(button);
     button.click();
-    button.remove(); // Limpiamos el DOM
+    button.remove(); 
   }
 }

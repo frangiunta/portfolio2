@@ -2,9 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-// Angular Material
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { Experiencia } from '../../interface/experiencia';
@@ -14,22 +12,20 @@ import { TokenService } from '../../services/token';
 @Component({
   selector: 'app-experiencia',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatCardModule, MatButtonModule, MatGridListModule],
+  imports: [CommonModule, FormsModule, MatCardModule, MatGridListModule],
   templateUrl: './experiencia.html',
   styleUrls: ['./experiencia.css']
 })
 export class ExperienciaComponent implements OnInit {
-  // Inyección moderna
   private experienciaService = inject(ExperienciaService);
   private tokenService = inject(TokenService);
 
-  // Estado con Signals
   public experiencias = signal<Experiencia[]>([]);
   public isAdmin = signal<boolean>(false);
   
-  public editExperiencia?: Experiencia;
-  public deleteExperiencia?: Experiencia;
-  public experiencia?: Experiencia;
+  public editExperiencia: Experiencia | null = null;
+  public deleteExperiencia: Experiencia | null = null;
+  public experiencia: Experiencia | null = null;
 
   ngOnInit(): void {
     this.getExperiencias();
@@ -61,7 +57,6 @@ export class ExperienciaComponent implements OnInit {
         console.log('Experiencia agregada exitosamente:', response);
         this.getExperiencias();
         addForm.reset();
-        // Cerrar modal correctamente
         const modal = document.getElementById('addExperiencia');
         if (modal) {
           const bsModal = new (window as any).bootstrap.Modal(modal);
@@ -93,24 +88,20 @@ export class ExperienciaComponent implements OnInit {
     });
   }
 
-  public onOpenModal(experiencia: Experiencia, mode?: string): void {
+  public onOpenModal(experiencia: Experiencia | null, mode?: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
     button.style.display = 'none';
-    
-    // Compatibilidad Bootstrap 5
+
     button.setAttribute('data-bs-toggle', 'modal');
-    
+
     if (mode === 'edit') {
       this.editExperiencia = experiencia;
       button.setAttribute('data-bs-target', '#updateExperiencia');
-    }
-    if (mode === 'add') {
-      this.experiencia = experiencia;
+    } else if (mode === 'add') {
       button.setAttribute('data-bs-target', '#addExperiencia');
-    }
-    if (mode === 'delete') {
+    } else if (mode === 'delete') {
       this.deleteExperiencia = experiencia;
       button.setAttribute('data-bs-target', '#deleteExperiencia');
     }

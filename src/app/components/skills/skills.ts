@@ -2,11 +2,8 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-// Angular Material
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-// Servicios e Interfaces
 import { SkillsService } from '../../services/skills';
 import { Skills } from '../../interface/skills';
 import { TokenService } from '../../services/token';
@@ -18,22 +15,18 @@ import { TokenService } from '../../services/token';
     CommonModule, 
     FormsModule, 
     MatProgressBarModule, 
-    MatButtonModule, 
     MatCardModule
   ],
   templateUrl: './skills.html',
   styleUrls: ['./skills.css']
 })
 export class SkillsComponent implements OnInit {
-  // Inyección de servicios moderna
   private skillsService = inject(SkillsService);
   private tokenService = inject(TokenService);
 
-  // Estado con Signals
   public skills = signal<Skills[]>([]);
-  public isAdmin = signal<boolean>(true); // for development: always show action buttons
+  public isAdmin = signal<boolean>(false); 
 
-  // Variables auxiliares para modales
   public editSkill: Skills | null = null;
   public deleteSkill: Skills | null = null;
 
@@ -59,7 +52,6 @@ export class SkillsComponent implements OnInit {
   }
 
   public onAddSkill(addForm: NgForm): void {
-    // Cerramos el modal usando el ID del botón de cierre (ajustado para Bootstrap 5)
     document.getElementById('add-skill-close')?.click();
     
     this.skillsService.addSkill(addForm.value).subscribe({
@@ -88,7 +80,6 @@ export class SkillsComponent implements OnInit {
     });
   }
 
-  // Lógica de apertura de modales adaptada a Bootstrap 5 (data-bs-target)
   public onOpenModal(skill: Skills | null, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
@@ -108,6 +99,6 @@ export class SkillsComponent implements OnInit {
 
     container?.appendChild(button);
     button.click();
-    button.remove(); // Limpieza del DOM
+    button.remove(); 
   }
 }

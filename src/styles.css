@@ -1,16 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
-/* Estilos globales */
 html, body { 
   height: 100%; 
   margin: 0; 
-  background-color: #000; /* Fondo negro por defecto para evitar destellos blancos */
+  background-color: #000; 
 }
 
 body { 
   font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
 
-/* Scrollbar personalizada para que combine con el modo oscuro */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -23,4 +20,64 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #444;
+}
+
+.modal-backdrop.show {
+  opacity: 0.8; 
+}
+
+.modal-content {
+  background-color: #2d2d2d; 
+  color: #f8f9fa;           
+  border: 1px solid #444;
+}
+
+.modal-header {
+  border-bottom-color: #444;
+}
+
+.modal-header .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+.modal-body .form-control {
+  background-color: #495057; 
+  color: #f8f9fa;
+  border-color: #6c757d;
+}
+
+.modal-body .form-control::placeholder {
+  color: #adb5bd;
+}
+
+.modal-footer {
+  border-top-color: #444;
+}
+
+.btn-pink {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #e83e8c;
+  --bs-btn-border-color: #e83e8c;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #d63384;
+  --bs-btn-hover-border-color: #ca317c;
+}
+
+.btn-outline-pink {
+  --bs-btn-color: #e83e8c;
+  --bs-btn-border-color: #e83e8c;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #e83e8c;
+  --bs-btn-hover-border-color: #e83e8c;
+}
+
+.text-pink {
+  color: #e83e8c !important;
+}
+
+.form-range::-webkit-slider-thumb {
+  background-color: #e83e8c;
+}
+
+.background {
+  background-color: #161616;
 }
