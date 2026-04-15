@@ -31,7 +31,6 @@ export class ToolbarComponent implements OnInit {
   public loginError = signal<string>('');
 
   ngOnInit(): void {
-    // Simplificamos la asignación del estado inicial
     this.isLogged.set(!!this.tokenService.getToken());
   }
 
@@ -48,34 +47,57 @@ export class ToolbarComponent implements OnInit {
   }
 
   onLogin(): void {
+    // 1. Validamos que no estén vacíos
     if (!this.nombreUsuario() || !this.password()) {
       this.loginError.set('Por favor ingrese usuario y contraseña');
       return;
     }
 
-    const loginUsuario: Login = {
-      nombreUsuario: this.nombreUsuario(),
-      password: this.password()
-    };
+    // --- CONFIGURACIÓN DE PRUEBA (MOCK) ---
+    const MOCK_USER = 'admin';
+    const MOCK_PASS = 'admin123';
 
+    console.log('Validando credenciales de prueba...');
+
+    // 2. Comprobamos contra nuestros datos hardcodeados
+    if (this.nombreUsuario() === MOCK_USER && this.password() === MOCK_PASS) {
+      
+      // Simulamos la respuesta exitosa del servidor
+      const mockData = {
+        token: 'fake-jwt-token-12345',
+        nombreUsuario: 'admin',
+        authorities: ['ROLE_ADMIN']
+      };
+
+      // Guardamos en el servicio de tokens
+      this.tokenService.setToken(mockData.token);
+      this.tokenService.setUserName(mockData.nombreUsuario);
+      this.tokenService.setAuthorities(mockData.authorities);
+      
+      // Actualizamos estado de la UI
+      this.isLogged.set(true);
+      this.closeLoginModal();
+      
+      // Redirigimos
+      this.router.navigate(['/main']);
+      
+    } else {
+      // 3. Si fallan los datos de prueba
+      this.loginError.set('Usuario o contraseña incorrectos (Use admin / admin123)');
+    }
+
+    /* // Cuando quieras volver al backend, descomenta esto y borra lo de arriba:
+    const loginUsuario: Login = { nombreUsuario: this.nombreUsuario(), password: this.password() };
     this.authService.login(loginUsuario).subscribe({
-      next: (data: any) => {
-        this.tokenService.setToken(data.token);
-        this.tokenService.setUserName(data.nombreUsuario);
-        this.tokenService.setAuthorities(data.authorities);
-        
-        this.isLogged.set(true);
-        this.closeLoginModal();
-      },
-      error: (err: any) => {
-        console.error('Error en login:', err);
-        this.loginError.set(err.error?.message || 'Error al iniciar sesión. Verifique sus credenciales.');
-      }
+       next: (data) => { ... },
+       error: (err) => { ... }
     });
+    */
   }
 
   onLogOut(): void {
     this.tokenService.logOut();
     this.isLogged.set(false);
+    this.router.navigate(['/login']); // Opcional: volver al login al salir
   }
 }
