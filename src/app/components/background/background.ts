@@ -67,8 +67,8 @@ export class BackgroundComponent implements AfterViewInit, OnDestroy {
       float c = (abs(sin(p.y + time * 0.1) + sin(p.x + time * 0.1))) * 0.5;
       
       // Colores personalizados: F527E0 (Rosa) y 4F17E8 (Morado)
-      vec3 color1 = vec3(0.96, 0.15, 0.88); // #F527E0
-      vec3 color2 = vec3(0.31, 0.09, 0.91); // #4F17E8
+      vec3 color1 = vec3(0.525, 0.651, 0.369); 
+      vec3 color2 = vec3(0.231, 0.776, 0.851);
       
       // Mezclar los colores y aplicar la intensidad animada
       vec3 finalColor = mix(color2, color1, c);
