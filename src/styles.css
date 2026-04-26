@@ -93,7 +93,11 @@ main.container-fluid {
 
 section {
   /* Asegúrate de que las secciones tampoco tapen el fondo si no lo deseas */
-  background-color: transparent; 
+  background-color: transparent;
+  /* Unificar la anchura de todos los componentes */
+  width: 100%;
+  max-width: 1000px; /* Ajusta este valor según la anchura de tu componente Skills */
+  margin: 0 auto; /* Esto centra las secciones horizontalmente */
 }
 
 /* Efecto de cristal (Glassmorphism) para los contenedores de los componentes.
