@@ -15,6 +15,10 @@ mat-card, .mat-mdc-card, .mat-card-title, .mat-card-subtitle, .mat-card-content 
   color: #000 !important;
 }
 
+.verde {
+  color: #a8e6cf !important;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
