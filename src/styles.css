@@ -33,8 +33,13 @@ mat-card, .mat-mdc-card, .mat-card-title, .mat-card-subtitle, .mat-card-content 
   background: #444;
 }
 
-.modal-backdrop.show {
-  opacity: 0.8; 
+/* Solución al modal oscurecido: 
+   Ocultar el backdrop externo y oscurecer el fondo del propio modal */
+.modal-backdrop {
+  display: none !important; 
+}
+.modal {
+  background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
 .modal-content {
@@ -90,8 +95,7 @@ mat-card, .mat-mdc-card, .mat-card-title, .mat-card-subtitle, .mat-card-content 
 }
 
 main.container-fluid {
-  position: relative;
-  z-index: 1; /* Para que quede por encima del canvas */
+
   background-color: transparent !important;
 }
 
