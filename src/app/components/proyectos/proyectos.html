@@ -1,17 +1,18 @@
-<mat-card class="m-3 p-4 shadow" style="background-color: #2d2d2d; color: white;">
+<section>
+<mat-card class="p-4 shadow">
   <mat-card-title class="text-center mb-4">Proyectos Realizados</mat-card-title>
 
   <div id="main-container">
     @if (proyectos().length > 0) {
       <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
         <div class="carousel-inner">
-          @for (proyecto of proyectos(); track proyecto.id; let i = $index) {
+          @for (proyecto of proyectos(); track proyecto.id; let i = $index) { 
             <div class="carousel-item" [class.active]="i === 0">
               <div class="d-flex justify-content-center">
-                <mat-card class="bg-dark text-white border-secondary" style="max-width: 700px; width: 100%;">
+                <mat-card class="text-white border-secondary" style="max-width: 700px; width: 100%;">
                   <div class="p-3 text-center">
-                    @if (proyecto.imglink) {
-                      <img [src]="proyecto.imglink" class="d-block w-100 rounded shadow-sm project-img" 
+                    @if (proyecto.imgLink) {
+                      <img [src]="proyecto.imgLink" class="d-block w-100 rounded shadow-sm project-img" 
                            [alt]="proyecto.nombre" style="max-height: 350px; object-fit: cover;">
                     }
                   </div>
@@ -20,10 +21,12 @@
                     <p class="text-info small">{{ proyecto.descripcion }}</p>
                     <p class="card-text text-center">{{ proyecto.resumen }}</p>
                   </mat-card-content>
-                  <mat-card-actions class="justify-content-center pb-3">
-                    <a [href]="proyecto.gitlink" target="_blank" class="btn btn-outline-light">
-                      <i class="bi bi-github me-1"></i> Ver en GitHub
-                    </a>  
+                  <mat-card-actions class="justify-content-center pb-3"> 
+                    @if (proyecto.gitLink) {
+                      <a [href]="proyecto.gitLink" target="_blank" class="btn btn-outline-light">
+                        <i class="bi bi-github me-1"></i> Ver en GitHub
+                      </a>
+                    }
                     @if (isAdmin()) { 
                       <button class="btn btn-sm btn-outline-pink mx-1" type="button" (click)="onOpenModal(proyecto, 'edit')">
                         Editar
@@ -60,6 +63,7 @@
     </button>
   </div>}
 </mat-card>
+</section>
 
 <div class="modal fade" id="addProyecto" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -86,11 +90,11 @@
           </div>
           <div class="mb-3">
             <label class="form-label">URL de la Imagen</label>
-            <input type="text" ngModel name="imglink" class="form-control" placeholder="https://..." required>
+            <input type="text" ngModel name="imgLink" class="form-control" placeholder="https://..." required>
           </div>
           <div class="mb-3">
             <label class="form-label">URL de GitHub</label>
-            <input type="text" ngModel name="gitlink" class="form-control" placeholder="https://github.com/..." required>
+            <input type="text" ngModel name="gitLink" class="form-control" placeholder="https://github.com/..." required>
           </div>
           <div class="modal-footer px-0 pb-0">
             <button type="button" id="add-proyecto-close" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -128,7 +132,11 @@
           </div>
           <div class="mb-3">
             <label class="form-label">Imagen URL</label>
-            <input type="text" [ngModel]="editProyecto?.imglink" name="imglink" class="form-control" required>
+            <input type="text" [ngModel]="editProyecto?.imgLink" name="imgLink" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">GitHub URL</label>
+            <input type="text" [ngModel]="editProyecto?.gitLink" name="gitLink" class="form-control" required>
           </div>
           <div class="modal-footer px-0 pb-0">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
