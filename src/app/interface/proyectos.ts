@@ -3,7 +3,7 @@ export interface Proyectos {
   nombre: string;
   descripcion: string;  
   resumen: string;      
-  imglink: string;      
-  gitlink: string;      
+  imgLink: string;      
+  gitLink: string;      
   proyectoCode: string; 
 }
